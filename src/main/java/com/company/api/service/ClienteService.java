@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.company.api.model.Cliente;
-import com.company.api.webclient.Client;
+import com.company.api.webclient.WebClientCliente;
 
 import reactor.core.publisher.Flux;
 
@@ -12,10 +12,16 @@ import reactor.core.publisher.Flux;
 public class ClienteService {
 
 	@Autowired
-	Client clienteService;
-
+	WebClientCliente webClientCliente;
+	
 	public Flux<Cliente> obterClientes() {
-		return clienteService.obterClientes();
+		return webClientCliente.obterClientes();
 	}
+	
+	public Cliente cadastrarCliente(Cliente body) {
+		return webClientCliente.cadastrarCliente(body);
+	}
+	
+	
 
 }

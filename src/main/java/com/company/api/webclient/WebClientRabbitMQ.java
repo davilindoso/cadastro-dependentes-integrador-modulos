@@ -4,29 +4,30 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.http.client.reactive.ClientHttpConnector;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.company.api.model.Cliente;
+import com.company.api.model.Mensagem;
 
 import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
-import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 
 @Component
-public class Client {
+public class WebClientRabbitMQ {
 
 	WebClient webClient;
 
 	@Autowired
 	WebClient.Builder builder;
 
-	@Value("${api.endpoint.cliente}")
-	private String endpointCliente;
+	@Value("${api.endpoint.rabbitMQ}")
+	private String endpointRabbitMQ;
 
 	@PostConstruct
 	public void init() {
@@ -35,11 +36,11 @@ public class Client {
 				.tcpConfiguration(client -> client.doOnConnected(conn -> conn.addHandlerLast(new ReadTimeoutHandler(99))
 						.addHandlerLast(new WriteTimeoutHandler(99))));
 		final ClientHttpConnector connector = new ReactorClientHttpConnector(httpClient);
-		webClient = builder.baseUrl(endpointCliente).clientConnector(connector).build();
+		webClient = builder.baseUrl(endpointRabbitMQ).clientConnector(connector).build();
 	}
-
-	public Flux<Cliente> obterClientes() {
-		return webClient.get().retrieve().bodyToFlux(Cliente.class);
+	
+	public void putMensagemFilaMQ(Mensagem mensagem) {
+		webClient.post().uri("/send").contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(Mono.just(mensagem), Mensagem.class).retrieve().bodyToMono(Mensagem.class).block();
 	}
 
 }
