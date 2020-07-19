@@ -22,7 +22,7 @@ public class RabbitMqController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	@RequestMapping("/put")
+	@RequestMapping("/enviar")
 	public void put(@Valid @RequestBody MensagemRabbitMq mensagem) {
 		envioMensagemMQService.enviarMensagem(mensagem);
 	}
