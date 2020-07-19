@@ -1,4 +1,4 @@
-package com.company.api.resources;
+package com.company.api.controller;
 
 import javax.validation.Valid;
 
