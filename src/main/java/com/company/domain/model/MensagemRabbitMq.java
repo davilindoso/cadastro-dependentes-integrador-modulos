@@ -1,6 +1,6 @@
 package com.company.domain.model;
 
-public class Mensagem {
+public class MensagemRabbitMq {
 	private String texto = "";
 
 	public String getTexto() {

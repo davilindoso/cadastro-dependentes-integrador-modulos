@@ -10,7 +10,7 @@ import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.company.domain.model.Mensagem;
+import com.company.domain.model.MensagemRabbitMq;
 
 import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
@@ -39,8 +39,8 @@ public class WebClientRabbitMQ {
 		webClient = builder.baseUrl(endpointRabbitMQ).clientConnector(connector).build();
 	}
 	
-	public void putMensagemFilaMQ(Mensagem mensagem) {
-		webClient.post().uri("/send").contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(Mono.just(mensagem), Mensagem.class).retrieve().bodyToMono(Mensagem.class).block();
+	public void putMensagemFilaMQ(MensagemRabbitMq mensagem) {
+		webClient.post().uri("/send").contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(Mono.just(mensagem), MensagemRabbitMq.class).retrieve().bodyToMono(MensagemRabbitMq.class).block();
 	}
 
 }
