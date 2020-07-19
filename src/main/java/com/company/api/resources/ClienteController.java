@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.company.api.model.Cliente;
-import com.company.api.service.ClienteService;
-import com.company.api.service.EnvioMensagemMQService;
+import com.company.domain.model.Cliente;
+import com.company.domain.service.ClienteService;
+import com.company.domain.service.EnvioMensagemMQService;
 
 import reactor.core.publisher.Flux;
 

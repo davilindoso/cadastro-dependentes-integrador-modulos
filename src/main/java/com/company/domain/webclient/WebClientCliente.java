@@ -1,4 +1,4 @@
-package com.company.api.webclient;
+package com.company.domain.webclient;
 
 import javax.annotation.PostConstruct;
 
@@ -10,7 +10,7 @@ import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.company.api.model.Cliente;
+import com.company.domain.model.Cliente;
 
 import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;

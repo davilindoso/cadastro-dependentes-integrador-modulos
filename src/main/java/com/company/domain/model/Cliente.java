@@ -1,4 +1,4 @@
-package com.company.api.model;
+package com.company.domain.model;
 
 import java.util.Date;
 

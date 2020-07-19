@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.company.api.model.Mensagem;
-import com.company.api.service.EnvioMensagemMQService;
+import com.company.domain.model.Mensagem;
+import com.company.domain.service.EnvioMensagemMQService;
 
 @RestController
 @RequestMapping("/rabbitmq")

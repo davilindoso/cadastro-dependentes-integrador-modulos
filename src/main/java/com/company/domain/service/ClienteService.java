@@ -1,10 +1,10 @@
-package com.company.api.service;
+package com.company.domain.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.company.api.model.Cliente;
-import com.company.api.webclient.WebClientCliente;
+import com.company.domain.model.Cliente;
+import com.company.domain.webclient.WebClientCliente;
 
 import reactor.core.publisher.Flux;
 

@@ -1,10 +1,10 @@
-package com.company.api.service;
+package com.company.domain.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.company.api.model.Mensagem;
-import com.company.api.webclient.WebClientRabbitMQ;
+import com.company.domain.model.Mensagem;
+import com.company.domain.webclient.WebClientRabbitMQ;
 
 @Service
 public class EnvioMensagemMQService {
