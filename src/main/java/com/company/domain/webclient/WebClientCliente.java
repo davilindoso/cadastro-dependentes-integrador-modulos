@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
-import com.company.api.controller.WebClientException;
 import com.company.domain.model.Cliente;
+import com.company.exception.WebClientException;
 
 import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
@@ -41,8 +41,7 @@ public class WebClientCliente {
 						.addHandlerLast(new WriteTimeoutHandler(99))));
 		final ClientHttpConnector connector = new ReactorClientHttpConnector(httpClient);
 		webClient = builder.baseUrl(endpointCliente).clientConnector(connector)
-				.defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-				.defaultHeader(HttpHeaders.USER_AGENT, "CADASTRO_DEPENDENTES").build();
+				.defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE).build();
 	}
 
 	public Cliente cadastrarCliente(Cliente body) {
@@ -56,11 +55,15 @@ public class WebClientCliente {
 		if (exception instanceof WebClientResponseException) {
 			throw new WebClientException(((WebClientResponseException) exception).getResponseBodyAsString());
 		}
-
+		throw new WebClientException("Ocorreu um erro inesperado ao realizar chamada webclient");
 	}
 
 	public Flux<Cliente> obterClientes() {
 		return webClient.get().retrieve().bodyToFlux(Cliente.class);
+	}
+
+	public WebClient getWebClient() {
+		return webClient;
 	}
 
 }

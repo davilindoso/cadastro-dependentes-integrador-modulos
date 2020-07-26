@@ -1,4 +1,4 @@
-package com.company.api.controller;
+package com.company.exception;
 
 public class WebClientException extends RuntimeException {
 
